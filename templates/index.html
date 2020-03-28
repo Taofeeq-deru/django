@@ -14,6 +14,7 @@
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.as_p }}
+                    {% comment %} <input type= /> {% endcomment %}
                     <button type="submit" class="btn btn-dark">Upload</button>
                 </form>
                 <div>
@@ -24,7 +25,7 @@
                     {% endif %}
                 </div>
                 <div class="my-5">
-                    <a href="{{ pdf_file_url }}" download class="btn btn-secondary">Download PDF</a>
+                    <a href="{{ pdf_url }}" download class="btn btn-secondary">Download PDF</a>
                 </div>
             </div>
         </div>

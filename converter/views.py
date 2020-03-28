@@ -6,7 +6,7 @@ from .forms import ImageForm
 from .convert import converter
 
 
-class FileFieldView(FormView):
+class ImageView(FormView):
     form_class = ImageForm
     template_name = "index.html"  # Replace with your template.
     success_url = "/"  # Replace with your URL or reverse().
@@ -14,20 +14,23 @@ class FileFieldView(FormView):
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
-        files = request.FILES.getlist("file_field")
+        images = request.FILES.getlist("image")
         # not seeing the files
-        print(files)
+        print(images)
         if form.is_valid():
             # if len(files) == 1:
             # for f in files:
             # Do something with each file.
-            do = converter(files)
-            # print(converter(files))
+            pdf_url = converter(images)
 
-            # print(do)
+            print(pdf_url)
             messages.info(request, "PDF ready for download")
 
-            return self.form_valid(form)
+            return render(request, "index.html", {"pdf_url": pdf_url})
 
         else:
             return self.form_invalid(form)
+
+
+# def image_upload(request):
+#     if request.method = 'POST':
